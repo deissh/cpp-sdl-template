@@ -16,3 +16,10 @@ http_archive(
     strip_prefix = "SDL2_ttf-2.0.14",
     urls = ["https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.0.14.zip"],
 )
+http_archive(
+    name = "imgui",
+    build_file = "imgui.BUILD",
+    sha256 = "283a41ad534d2d3d7d480a6b6e2f16cc039c26444bfaaab2fea62a0bdeb07bd0",
+    strip_prefix = "imgui-1.76",
+    urls = ["https://github.com/ocornut/imgui/archive/v1.76.zip"],
+)

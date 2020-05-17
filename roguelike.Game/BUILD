@@ -5,6 +5,7 @@ cc_library(
   visibility = ["//visibility:public"],
   deps = [
     "@sdl2",
-    "@sdl2_ttf"
+    "@sdl2_ttf",
+    "@imgui"
   ]
 )
