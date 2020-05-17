@@ -20,7 +20,7 @@ void Game::init(const char* title, GameArgs args) {
         | SDL_WINDOW_ALLOW_HIGHDPI;
 
     if (args.fullscreen) {
-        flags |= SDL_WINDOW_FULLSCREEN;
+        flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
     }
 
     window = SDL_CreateWindow(
@@ -51,12 +51,12 @@ void Game::init(const char* title, GameArgs args) {
     ImGui_ImplSDL2_InitForOpenGL(window, gl_context);
     ImGui_ImplOpenGL2_Init();
 
-
-    while(true) {
+    bool done = false;
+    while(!done) {
         SDL_Event event;
         if (SDL_PollEvent(&event))
         {
-            if (event.type == SDL_QUIT) break;
+            if (event.type == SDL_QUIT) done = true;
         }
 
         // Start the Dear ImGui frame
@@ -64,7 +64,24 @@ void Game::init(const char* title, GameArgs args) {
         ImGui_ImplSDL2_NewFrame(window);
         ImGui::NewFrame();
 
-        ImGui::ShowDemoWindow();
+        if (ImGui::BeginMainMenuBar())
+        {
+            if (ImGui::BeginMenu("Menu"))
+            {
+                if (ImGui::MenuItem("New")) {}
+                if (ImGui::MenuItem("Open", "Ctrl+O")) {}
+                if (ImGui::MenuItem("Save", "Ctrl+S")) {}
+                if (ImGui::MenuItem("Save As..")) {}
+
+                ImGui::Separator();
+
+                if (ImGui::MenuItem("Quit", "Alt+F4")) done = true;
+
+                ImGui::EndMenu();
+            }
+        
+            ImGui::EndMainMenuBar();
+        }
 
         ImGui::Render();
         ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());

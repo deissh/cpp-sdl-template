@@ -6,7 +6,7 @@ int main() {
     args.width = 800;
     args.height = 800;
     args.vsync = true;
-    args.fullscreen = false;
+    args.fullscreen = true;
 
     Game game;
     game.init("Game Title", args);
